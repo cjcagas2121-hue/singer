@@ -1,0 +1,499 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#d9d6ff">
+<title>Something Amazing 👀</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  padding-top: max(20px, env(safe-area-inset-top));
+  padding-bottom: max(20px, env(safe-area-inset-bottom));
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ffd6e7, #d9d6ff);
+  overflow-x: hidden;
+}
+
+.card {
+  background: white;
+  width: 100%;
+  max-width: 460px;
+  padding: 28px 20px;
+  border-radius: 24px;
+  text-align: center;
+  box-shadow: 0 12px 35px #0002;
+}
+
+.emoji {
+  font-size: 55px;
+}
+
+h1 {
+  color: #292044;
+  font-size: clamp(25px, 7vw, 32px);
+  overflow-wrap: anywhere;
+}
+
+p {
+  color: #696477;
+  line-height: 1.6;
+}
+
+button {
+  min-height: 48px;
+  padding: 13px 20px;
+  border: 0;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible {
+  outline: 3px solid #222;
+  outline-offset: 3px;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 28px 0 10px;
+}
+
+#yes, .primary {
+  background: #6c4cff;
+  color: white;
+}
+
+#no {
+  background: #ff5470;
+  color: white;
+  z-index: 20;
+}
+
+.small {
+  font-size: 12px;
+  margin-top: 20px;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  padding: 16px;
+  padding-top: max(16px, env(safe-area-inset-top));
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
+  background: #100c20e8;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.popup {
+  width: 100%;
+  max-width: 430px;
+  max-height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  background: white;
+  padding: 24px 18px;
+  border-radius: 22px;
+  text-align: center;
+  animation: appear .25s ease;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: scale(.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.news {
+  padding: 12px;
+  margin: 15px 0;
+  border-radius: 12px;
+  background: #ffedf0;
+  color: #c21f49;
+  font-weight: bold;
+}
+
+.primary, .secondary {
+  width: 100%;
+  margin-top: 14px;
+}
+
+.secondary {
+  background: #eeeaf9;
+  color: #392b65;
+}
+
+.video-player {
+  display: block;
+  width: 100%;
+  max-height: 45dvh;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: black;
+  border-radius: 12px;
+  margin-top: 12px;
+}
+
+@media (max-width: 360px) {
+  .card {
+    padding: 22px 14px;
+  }
+
+  .popup {
+    padding: 20px 14px;
+  }
+
+  .buttons {
+    gap: 9px;
+  }
+
+  button {
+    padding: 12px 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- MAIN PAGE -->
+<main class="card">
+  <div class="emoji">👀✨</div>
+
+  <h1>Wanna see something amazing?</h1>
+
+  <p>
+    Three singers.<br>
+    One legendary song.<br>
+    Absolutely questionable vocals. 💀
+  </p>
+
+  <div class="buttons">
+    <button id="yes">YES 😎</button>
+    <button id="no">NO 💀</button>
+  </div>
+
+  <p class="small">
+    ⚠️ Choose wisely. There is no escape.
+  </p>
+</main>
+
+<!-- STORY POPUP -->
+<div class="overlay" id="storyOverlay">
+  <section class="popup" role="dialog"
+           aria-modal="true" aria-labelledby="storyTitle">
+
+    <div class="emoji">🚨🎶</div>
+
+    <h1 id="storyTitle">BREAKING NEWS!</h1>
+
+    <div class="news">
+      THREE SINGERS HAVE ENTERED THE CHAT.
+    </div>
+
+    <p>
+      They trained for approximately five minutes.
+      They chose one of the saddest songs ever.
+    </p>
+
+    <h2>Supermarket Flowers 🌸</h2>
+
+    <p>
+      Three microphones.<br>
+      Three voices.<br>
+      One brave audience.
+    </p>
+
+    <p>
+      Ed Sheeran has not been informed. 😭
+    </p>
+
+    <button class="primary" id="watch">
+      WITNESS THE PERFORMANCE 🎬
+    </button>
+  </section>
+</div>
+
+<!-- SINGING VIDEO POPUP -->
+<div class="overlay" id="videoOverlay">
+  <section class="popup" role="dialog"
+           aria-modal="true" aria-labelledby="videoTitle">
+
+    <div class="emoji">🎤😭</div>
+
+    <h1 id="videoTitle">THE THREE TENORS</h1>
+
+    <p>
+      Performing their unforgettable version of
+      <b>Supermarket Flowers</b>. 🌸
+    </p>
+
+    <video id="videoPlayer"
+           class="video-player"
+           controls
+           playsinline
+           webkit-playsinline
+           preload="metadata">
+      <source src="./classmate.mp4" type="video/mp4">
+      Your browser does not support this video.
+    </video>
+
+    <p class="small">
+      Vocal harmony: questionable.<br>
+      Confidence: unlimited. 💀
+    </p>
+
+    <button class="primary" id="moonButton">
+      CLICK IF YOU WANT TO SEE THE FULL MOON 🌕
+    </button>
+
+    <button class="secondary" id="closeVideo">
+      I'VE HEARD ENOUGH 😭
+    </button>
+  </section>
+</div>
+
+<!-- FULL MOON SURPRISE VIDEO POPUP -->
+<div class="overlay" id="moonOverlay">
+  <section class="popup" role="dialog"
+           aria-modal="true" aria-labelledby="moonTitle">
+
+    <div class="emoji">🌕💀</div>
+
+    <h1 id="moonTitle">THE FULL MOON REVEAL</h1>
+
+    <p>
+      You wanted to see the full moon... 👀
+    </p>
+
+    <p>
+      NASA wasn't ready for this discovery. 🚀
+      Scientists are currently investigating.
+    </p>
+
+    <video id="sunPlayer"
+           class="video-player"
+           controls
+           playsinline
+           webkit-playsinline
+           preload="metadata">
+      <source src="./sun.mp4" type="video/mp4">
+      Your browser does not support this video.
+    </video>
+
+    <p class="small">
+      NASA has declined to comment. 💀
+    </p>
+
+    <button class="primary" id="backToSingers">
+      BACK TO THE CONCERT 🎤
+    </button>
+
+    <button class="secondary" id="closeMoon">
+      I'VE SEEN ENOUGH 😭
+    </button>
+  </section>
+</div>
+
+<script>
+const yes = document.getElementById("yes");
+const no = document.getElementById("no");
+
+const storyOverlay = document.getElementById("storyOverlay");
+const videoOverlay = document.getElementById("videoOverlay");
+const moonOverlay = document.getElementById("moonOverlay");
+
+const videoPlayer = document.getElementById("videoPlayer");
+const sunPlayer = document.getElementById("sunPlayer");
+
+let attempts = 0;
+let lastMove = 0;
+
+const messages = [
+  "NICE TRY 💀",
+  "NOPE 😂",
+  "CATCH ME FIRST",
+  "YOU WISH 😭",
+  "JUST CLICK YES",
+  "BRO STOP 💀"
+];
+
+// Make NO escape.
+function escapeButton() {
+  const now = Date.now();
+
+  if (now - lastMove < 150) return;
+  lastMove = now;
+
+  no.textContent = messages[
+    Math.min(attempts, messages.length - 1)
+  ];
+
+  attempts++;
+
+  no.style.position = "fixed";
+  no.style.margin = "0";
+
+  const rect = no.getBoundingClientRect();
+  const padding = 12;
+
+  const maxX = Math.max(
+    padding,
+    window.innerWidth - rect.width - padding
+  );
+
+  const maxY = Math.max(
+    padding,
+    window.innerHeight - rect.height - padding
+  );
+
+  no.style.left =
+    (padding + Math.random() * (maxX - padding)) + "px";
+
+  no.style.top =
+    (padding + Math.random() * (maxY - padding)) + "px";
+}
+
+// Computers: run away when the mouse approaches.
+no.addEventListener("pointerenter", function(event) {
+  if (event.pointerType === "mouse") {
+    escapeButton();
+  }
+});
+
+// Phones and computers: clicking NO makes it escape.
+no.addEventListener("click", escapeButton);
+
+// YES opens the story.
+yes.addEventListener("click", function() {
+  storyOverlay.style.display = "flex";
+});
+
+// Story opens the singing video.
+document.getElementById("watch").addEventListener("click", function() {
+  storyOverlay.style.display = "none";
+  videoOverlay.style.display = "flex";
+
+  videoPlayer.play().catch(function() {
+    // If autoplay is blocked, the viewer can tap Play.
+  });
+});
+
+// Stop a video safely.
+function stopVideo(player) {
+  player.pause();
+}
+
+// Open the sun.mp4 surprise.
+document.getElementById("moonButton").addEventListener("click", function() {
+  stopVideo(videoPlayer);
+
+  videoOverlay.style.display = "none";
+  moonOverlay.style.display = "flex";
+
+  sunPlayer.currentTime = 0;
+
+  sunPlayer.play().catch(function() {
+    // Manual Play is available on mobile browsers.
+  });
+});
+
+// Return to the singing video.
+document.getElementById("backToSingers").addEventListener("click", function() {
+  stopVideo(sunPlayer);
+
+  moonOverlay.style.display = "none";
+  videoOverlay.style.display = "flex";
+});
+
+// Close the singing video popup.
+document.getElementById("closeVideo").addEventListener("click", function() {
+  stopVideo(videoPlayer);
+  videoOverlay.style.display = "none";
+});
+
+// Close the surprise popup.
+document.getElementById("closeMoon").addEventListener("click", function() {
+  stopVideo(sunPlayer);
+  stopVideo(videoPlayer);
+
+  moonOverlay.style.display = "none";
+  videoOverlay.style.display = "none";
+});
+
+// Keep the NO button inside the screen after rotation.
+window.addEventListener("resize", function() {
+  if (no.style.position !== "fixed") return;
+
+  const rect = no.getBoundingClientRect();
+  const padding = 12;
+
+  no.style.left = Math.max(
+    padding,
+    Math.min(
+      rect.left,
+      window.innerWidth - rect.width - padding
+    )
+  ) + "px";
+
+  no.style.top = Math.max(
+    padding,
+    Math.min(
+      rect.top,
+      window.innerHeight - rect.height - padding
+    )
+  ) + "px";
+});
+
+// Escape key closes the current popup.
+document.addEventListener("keydown", function(event) {
+  if (event.key !== "Escape") return;
+
+  if (moonOverlay.style.display === "flex") {
+    stopVideo(sunPlayer);
+    moonOverlay.style.display = "none";
+  } else if (videoOverlay.style.display === "flex") {
+    stopVideo(videoPlayer);
+    videoOverlay.style.display = "none";
+  } else if (storyOverlay.style.display === "flex") {
+    storyOverlay.style.display = "none";
+  }
+});
+</script>
+
+</body>
+</html>
